@@ -1,6 +1,5 @@
 import pygame
 import os
-import time
 
 pygame.init()
 WIDTH, HEIGHT = 1700, 700  # Window Width and Height.
@@ -8,13 +7,13 @@ BIKE_WIDTH, BIKE_HEIGHT = 330, 230
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
 WHITE = (255, 255, 255)
-FPS = (6)
-VEL_X = 6
-VEL_Y = 6
-Y_GRAVITY = 1
-JUMP_HEIGHT = 20
+FPS = 15
+VEL_X = 12
+VEL_Y = 12
+Y_GRAVITY = 2.3
+JUMP_HEIGHT = 25
 
-jump_speed = 4
+jump_speed = 25
 
 pygame.display.set_caption("FirstDraftRemake")
 
@@ -30,7 +29,7 @@ BIKE_FLAT_LIST = [pygame.image.load(os.path.join('SpriteListBike', 'BikeSpriteL1
                   pygame.image.load(os.path.join('SpriteListBike', 'BikeSpriteL9.png'))]
 
 
-def draw_window(BIKE_FLAT,bike):  # Draws things onto the background window
+def draw_window(BIKE_FLAT, bike):  # Draws things onto the background window
     WIN.blit(FOREST, (0, 0))
     WIN.blit(BIKE_FLAT, (bike.x, bike.y))
     pygame.display.update()
@@ -65,8 +64,6 @@ def main():
 
         BIKE_FLAT = pygame.transform.scale(BIKE_FLAT, (BIKE_WIDTH, BIKE_HEIGHT))
 
-        # BIKE_FLAT = pygame.transform.scale(BIKE_FLAT, (BIKE_WIDTH, BIKE_HEIGHT))
-
         pygame.display.update()
 
         value += 1
@@ -82,7 +79,11 @@ def main():
         if Y_VELOCITY < -JUMP_HEIGHT:
             jumping = False
             Y_VELOCITY = JUMP_HEIGHT
-
+            print("Y VEL", Y_VELOCITY)
+            print("Jumping height", JUMP_HEIGHT)
+            print("Bike.y", bike.y)
+            bike.y = bike.y + 20
+            bike.y = bike.y + 7
         draw_window(BIKE_FLAT, bike)
 
     main()
@@ -90,4 +91,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
